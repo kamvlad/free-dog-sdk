@@ -126,6 +126,32 @@ class motorCmdArray:
         self.Unknown7 = motorCmd(mode=MotorModeLow.Servo, q=0, dq=0, tau=0, Kp=0, Kd=0, reserve=[0,0,0])
         self.Unknown8 = motorCmd(mode=MotorModeLow.Servo, q=0, dq=0, tau=0, Kp=0, Kd=0, reserve=[0,0,0])
 
+    def motor(self, index: int):
+        if index == 0:
+            return self.FR_0
+        elif index == 1:
+            return self.FR_1
+        elif index == 2:
+            return self.FR_2
+        if index == 3:
+            return self.FL_0
+        elif index == 4:
+            return self.FL_1
+        elif index == 5:
+            return self.FL_2
+        if index == 6:
+            return self.RR_0
+        elif index == 7:
+            return self.RR_1
+        elif index == 8:
+            return self.RR_2
+        if index == 9:
+            return self.RL_0
+        elif index == 10:
+            return self.RL_1
+        elif index == 11:
+            return self.RL_2
+
     def setMotorCmd(self, motorIndex, motorCmd):
         if motorIndex == 'FR_0' or motorIndex == 0:
             self.FR_0 = motorCmd
