@@ -14,10 +14,10 @@ class lowState:
         self.version = bytearray(8)
         self.bandWidth = bytearray(4)
         self.imu = imu([0.0,0.0,0.0,0.0],[0.0,0.0,0.0],[0.0,0.0,0.0],[0.0,0.0,0.0],0)
-        self.motorState = [motorState(0,0,0,0,0,0,0,0,0,0)]*20
+        self.motorState = [motorState(0,0,0,0,0,0,0,0,0,0) for _ in range(20)]
         self.bms = bmsState(0,0,0,0,0,0,0,0,0)
-        self.footForce = [bytes.fromhex('0000')]*4
-        self.footForceEst = [bytes.fromhex('0000')]*4
+        self.footForce = [bytes.fromhex('0000') for _ in range(4)]
+        self.footForceEst = [bytes.fromhex('0000') for _ in range(4)]
         self.tick = bytearray(4)
         self.wirelessRemote = bytearray(40)
         self.reserve = bytearray(4)
