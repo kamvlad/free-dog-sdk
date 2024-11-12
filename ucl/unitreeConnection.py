@@ -1,3 +1,4 @@
+import time
 import socket
 from threading import Thread, Event
 from ucl.common import pretty_print_obj
@@ -42,7 +43,7 @@ class unitreeConnection:
 
     def connect(self):
         sock = socket.socket(socket.AF_INET, # Internet
-                     socket.SOCK_DGRAM) # UDP
+                             socket.SOCK_DGRAM) # UDP
 
         # sock.bind((self.localIP, self.listenPort))
         sock.settimeout(1)
@@ -55,14 +56,20 @@ class unitreeConnection:
         # print('[*] Start receive Thread ...\n')
         while not event.isSet():
             try:
-                self.data.append(self.sock.recv(2048))
+                data = self.sock.recv(2048)
+                self.data.append((time.time_ns(), data))
             except Exception as e:
                 # print(e)
                 pass
         # print('[*] Exited receive Thread ...')
 
     def getData(self):
-        ret = self.data.copy()
+        ret = [e[1] for e in self.data]
         # Clear data buffer after handing it out
+        self.data.clear()
+        return ret
+
+    def getTimedData(self):
+        ret = self.data.copy()
         self.data.clear()
         return ret
